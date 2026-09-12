@@ -3,41 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>सरल बृहत्पाराशर - ज्योतिष अध्ययन</title>
+  <title>बृहत्पाराशर सरल ज्ञान</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style> body { font-family: 'Mukta', sans-serif; } </style>
 </head>
-<body class="bg-stone-50 text-stone-900 min-h-screen pb-12">
+<body class="bg-stone-100 text-stone-900 min-h-screen pb-16">
 
+  <!-- Header -->
   <header class="bg-amber-950 text-amber-50 shadow-md sticky top-0 z-50">
-    <div class="max-w-xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <div class="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
       <div>
-        <h1 class="text-lg font-bold tracking-wide flex items-center gap-2">
+        <h1 class="text-lg font-bold tracking-wide flex items-center gap-1.5">
           <span>📖</span> बृहत्पाराशर सरल ज्ञान
         </h1>
-        <p class="text-[11px] text-amber-200">प्रथम खण्ड (अध्याय १ - ४५) : सम्पूर्ण फलित सूत्र</p>
+        <p class="text-[11px] text-amber-200">सम्पूर्ण फलित सूत्र एवं श्लोक विश्लेषण</p>
       </div>
-      <div class="text-right">
-        <span id="shloka-count" class="text-xs font-semibold bg-amber-900 border border-amber-700 px-2.5 py-1 rounded-full text-amber-100"></span>
+      <div>
+        <span id="badge-count" class="text-xs font-semibold bg-amber-900 border border-amber-700 px-2.5 py-1 rounded-full text-amber-100">प्रतीक्षा...</span>
       </div>
     </div>
   </header>
 
   <main class="max-w-xl mx-auto px-4 pt-4 space-y-4">
 
-    <!-- Controls -->
-    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-stone-200 space-y-3">
+    <!-- Filter Card -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-stone-200 space-y-3">
       <div>
-        <label for="chapter-select" class="block text-[11px] font-bold text-amber-900 uppercase tracking-wider mb-1">
-          अध्याय चुनें:
-        </label>
+        <label for="ch-select" class="block text-xs font-bold text-amber-950 mb-1">अध्याय चुनें:</label>
         <select 
-          id="chapter-select" 
-          class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm font-semibold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800"
-          onchange="switchChapter(this.value)"
+          id="ch-select" 
+          class="w-full px-3 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-sm font-semibold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800"
         >
           <option value="1">अध्याय १ : सृष्टिक्रम वर्णन</option>
           <option value="2">अध्याय २ : सृष्टि-स्थिति एवं ग्रह-अवतार</option>
@@ -45,216 +43,142 @@
         </select>
       </div>
 
-      <input 
-        type="text" 
-        id="search" 
-        placeholder="श्लोक संख्या, ग्रह, योग या फलित नियम खोजें..." 
-        class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
-        oninput="filterCurrentChapter()"
-      >
+      <div>
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="श्लोक, ग्रह या फलित नियम खोजें..." 
+          class="w-full px-3.5 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
+        >
+      </div>
 
-      <div class="flex items-center justify-between text-xs text-stone-500 px-1">
-        <span id="current-chapter-title" class="font-semibold text-amber-950"></span>
-        <span id="active-count" class="font-semibold text-amber-900"></span>
+      <div class="flex items-center justify-between text-xs text-stone-500 pt-1">
+        <span id="label-chapter" class="font-bold text-amber-950"></span>
+        <span id="label-filtered" class="font-semibold text-stone-600"></span>
       </div>
     </div>
 
-    <!-- Cards Output -->
+    <!-- Cards Container -->
     <div id="cards-container" class="space-y-4"></div>
 
   </main>
 
   <script>
-    const chaptersMasterData = {
-      "1": [
-        {
-          "shloka_num": "श्लोक १",
-          "topic": "मङ्गलाचरण (परमात्मा वंदना)",
-          "sanskrit": "प्रणम्य जगदुत्पत्तिस्थितिसंहारकारिणम् ।\nपरमात्मानमव्यक्तां बुद्धिं च जगतां पतिम् ॥ १ ॥",
-          "word_meaning": "प्रणम्य = प्रणाम करके; जगत्-उत्पत्ति-स्थिति-संहार-कारिणम् = जगत की रचना, पालन और संहार करने वाले; परमात्मानम् = परमात्मा को; अव्यक्तां बुद्धिं = अव्यक्त बुद्धि स्वरूप; जगतां पतिम् = चराचर के स्वामी को।",
-          "saral_hindi": "जो इस संपूर्ण ब्रह्मांड की रचना, पालन और संहार करने वाले हैं, उन परमेश्वर, अव्यक्त बुद्धि स्वरूप और जगत के स्वामी श्रीहरि को नमन करके यह शास्त्र प्रारंभ होता है।",
-          "phalit_sutra": "गूढ़ शास्त्र का अध्ययन आरंभ करने से पूर्व ईश्वर व गुरु का ध्यान आवश्यक है ताकि साधक का चित्त स्थिर और दृष्टि निष्पक्ष रहे।"
-        },
-        {
-          "shloka_num": "श्लोक २-३",
-          "topic": "मैत्रेय का पराशर मुनि से प्रश्न",
-          "sanskrit": "अथातः संप्रवक्ष्यामि पाराशरमतं परम् ।\nमैत्रेयः परिपप्रच्छ पराशरमृषिं पुरा ॥ २ ॥\nसर्वशास्त्रार्थतत्त्वज्ञं वेदान्तविदुषां वरम् ।\nकृताञ्जलिपुटो भूत्वा विनयावनतो मुनिः ॥ ३ ॥",
-          "word_meaning": "अथ अतः = इसके पश्चात्; संप्रवक्ष्यामि = कहता हूँ; पाराशरमतं परम् = पराशर के श्रेष्ठ मत को; मैत्रेयः परिपप्रच्छ = मैत्रेय ने प्रश्न पूछा; कृताञ्जलिपुटः = हाथ जोड़कर; विनयावनतः = विनम्र होकर।",
-          "saral_hindi": "प्राचीन काल में महर्षि मैत्रेय ने समस्त शास्त्रों के ज्ञाता भगवान पराशर के सम्मुख हाथ जोड़कर अत्यंत विनम्रता से ज्ञान प्राप्ति हेतु प्रश्न पूछा।",
-          "phalit_sutra": "ज्ञान प्राप्ति का प्रथम नियम अहंकार-शून्यता है। बिना विनम्रता और समर्पण के फलित के गूढ़ रहस्य समझ नहीं आते।"
-        },
-        {
-          "shloka_num": "श्लोक ४",
-          "topic": "सृष्टि व ग्रह गति का प्रश्न",
-          "sanskrit": "भगवन् परमं ज्ञानं ग्रहाणां चरितं महत् ।\nकथं सृष्टिरियं जाता जगतश्च कथं स्थितिः ॥ ४ ॥",
-          "word_meaning": "भगवन् = हे मुनिवर!; परमं ज्ञानं = श्रेष्ठ ज्ञान; ग्रहाणां चरितं महत् = ग्रहों की चाल व प्रभाव; कथं = कैसे; सृष्टिः इयं जाता = यह सृष्टि उत्पन्न हुई।",
-          "saral_hindi": "हे भगवन्! मुझे ग्रहों की अद्भुत चाल और प्रभाव का ज्ञान समझाइए। यह सृष्टि कैसे उत्पन्न हुई और यह जगत किस नियम पर टिका है?",
-          "phalit_sutra": "ज्योतिष केवल भविष्यफल नहीं, बल्कि खगोलीय शक्तियों और सृष्टि-चक्र को समझने का विज्ञान है।"
-        },
-        {
-          "shloka_num": "श्लोक ५",
-          "topic": "जीवों का जन्म-मरण एवं कर्मफल",
-          "sanskrit": "जीवाः कथं समुत्पन्नाः संह्रियन्ते च ते पुनः ।\nग्रहाणां तु गतिं ब्रूहि विचित्रां च शुभाशुभाम् ॥ ५ ॥",
-          "word_meaning": "जीवाः कथं समुत्पन्नाः = प्राणी किस प्रकार जन्म लेते हैं; संह्रियन्ते च ते पुनः = और उनका नाश कैसे होता है; ग्रहाणां तु गतिं ब्रूहि = ग्रहों की गति और उनके शुभ-अशुभ फल कहिए।",
-          "saral_hindi": "संसार में जीव कैसे जन्म लेते हैं और उनका अंत कैसे होता है? नवग्रह अपनी गति से जीवों को किस प्रकार शुभ और अशुभ फल प्रदान करते हैं?",
-          "phalit_sutra": "प्रत्येक जीव का जन्म-मरण और जीवन की घटनाएं उसके संचित कर्मों और ग्रहों के समय-चक्र (दशा) से बंधी होती हैं।"
-        },
-        {
-          "shloka_num": "श्लोक ६",
-          "topic": "पराशर मुनि का उत्तरारंभ",
-          "sanskrit": "मैत्रेयेणैवं पृष्टः सन् पराशरो मुनिसत्तमः ।\nप्राह प्रीतमना विप्रं सर्वशास्त्रविशारदः ॥ ६ ॥",
-          "word_meaning": "मैत्रेयेण एवं पृष्टः = मैत्रेय द्वारा पूछे जाने पर; पराशरः मुनिसत्तमः = मुनिश्रेष्ठ पराशर जी; प्राह = बोले; प्रीतमना = प्रसन्नचित्त होकर।",
-          "saral_hindi": "शिष्य मैत्रेय द्वारा जनकल्याण हेतु यह प्रश्न सुनकर समस्त शास्त्रों के ज्ञाता पराशर जी का हृदय प्रसन्न हो गया और उन्होंने उपदेश देना आरंभ किया।",
-          "phalit_sutra": "जिज्ञासु का प्रश्न जब जनकल्याणकारी होता है, तभी गुरु हृदय के गूढ़ रहस्यों को प्रकट करते हैं।"
-        },
-        {
-          "shloka_num": "श्लोक ७",
-          "topic": "सुपात्र शिष्य के लक्षण",
-          "sanskrit": "शान्ताय गुरुभक्ताय सर्वदा सत्यवादिने ।\nआस्तिकाय प्रदातव्यं ततः श्रेयो ह्यवाप्स्यति ॥ ७ ॥",
-          "word_meaning": "शान्ताय = शांत मन वाले को; गुरुभक्ताय = गुरु में निष्ठावान को; सर्वदा सत्यवादिने = सदा सच बोलने वाले को; आस्तिकाय = ईश्वरविश्वासी को; प्रदातव्यं = देना चाहिए।",
-          "saral_hindi": "यह ज्योतिष विद्या केवल उस शिष्य को सिखानी चाहिए जिसका स्वभाव शांत हो, जो गुरु का आदर करता हो, सदैव सत्य बोलता हो और जिसका ईश्वर पर सच्चा विश्वास हो।",
-          "phalit_sutra": "विद्या व परामर्श सदैव विनम्र और आस्तिक व्यक्ति को दें। ज्योतिषी के लिए सत्यवादी और शांतचित्त होना पहली शर्त है।"
-        },
-        {
-          "shloka_num": "श्लोक ८",
-          "topic": "अपात्र को विद्या देने का दोष",
-          "sanskrit": "न देयं परशिष्याय नास्तिकाय शठाय वा ।\nदत्ते प्रतिदिनं दुःखं जायते नात्र संशयः ॥ ८ ॥",
-          "word_meaning": "न देयं = नहीं देना चाहिए; परशिष्याय = दूसरे के शिष्य को; नास्तिकाय = नास्तिक को; शठाय वा = या कुटिल/धूर्त को; दत्ते = देने पर; प्रतिदिनं दुःखं जायते = प्रतिदिन दुःख ही उत्पन्न होता है।",
-          "saral_hindi": "दूसरे के शिष्य, नास्तिक तथा शठ (कपटी व कुटिल स्वभाव वाले) को इस शास्त्र का ज्ञान कभी नहीं देना चाहिए। ऐसे अपात्रों को ज्ञान देने से प्रतिदिन केवल दुःख की प्राप्ति होती है।",
-          "phalit_sutra": "अपात्र व्यक्ति ज्ञान का दुरुपयोग करके केवल भ्रम और पीड़ा फैलाता है।"
-        },
-        {
-          "shloka_num": "श्लोक ९",
-          "topic": "परमब्रह्म भगवान विष्णु का स्वरूप",
-          "sanskrit": "एकेऽव्यक्तात्मकोविष्णुरनादिः प्रभुरीश्वरः ।\nशुद्धसत्त्वो जगत्स्वामी निर्गुणस्त्रिगुणान्वितः ॥ ९ ॥",
-          "word_meaning": "एकः = एक अद्वितीय; अव्यक्तात्मकः = इंद्रियातीत; विष्णुः = सर्वव्यापी; अनादिः = आरंभ रहित; शुद्धसत्त्वः = विशुद्ध सत्त्वमय; त्रिगुणान्वितः = तीनों गुणों से युक्त।",
-          "saral_hindi": "भगवान विष्णु ही इस संसार के एकमात्र मूल आधार हैं। वे अनादि, सर्वव्यापी, अव्यक्त और सबके स्वामी हैं। वे स्वयं निर्गुण होकर भी त्रिगुणों को धारण करते हैं।",
-          "phalit_sutra": "नवग्रह इन्हीं परमचेतना रूपी विष्णु के विभिन्न अंगों और शक्तियों का प्रकटीकरण हैं।"
-        },
-        {
-          "shloka_num": "श्लोक १०",
-          "topic": "सृष्टि निर्माण एवं पालन",
-          "sanskrit": "संसारकारकः श्रीमान्निमित्तात्मा प्रतापवान् ।\nएकांशेन जगत्सर्वं सृजत्यवति लीलया ॥ १० ॥",
-          "word_meaning": "संसारकारकः = संसार रचने वाले; एकांशेन = अपने एक-चौथाई अंश से; जगत्सर्वं = पूरे ब्रह्मांड को; सृजति = रचते हैं; अवति = पालन करते हैं; लीलया = सहज इच्छा मात्र से।",
-          "saral_hindi": "वे महाप्रतापी श्रीहरि ही संसार के निमित्त कारण हैं। उन्होंने बिना किसी प्रयास के, केवल अपनी लीला से अपने एक-चौथाई अंश मात्र से इस संपूर्ण ब्रह्मांड को रचा है।",
-          "phalit_sutra": "संपूर्ण दृश्य जगत और ग्रह-नक्षत्र परमात्मा की चेतना के एक अंश में गतिमान हैं।"
-        },
-        {
-          "shloka_num": "श्लोक ११",
-          "topic": "त्रिपाद अमृत व एकपाद प्रपंच",
-          "sanskrit": "त्रिपादं तस्य देवस्य ह्यमृतं तत्त्वदर्शिनः ।\nविन्दन्ति तत्प्रमाणं च सप्रधानं तथैकपात् ॥ ११ ॥",
-          "word_meaning": "त्रिपादं = तीन चौथाई भाग; अमृतं = अविनाशी; तत्त्वदर्शिनः = तत्वदर्शी ऋषि; विन्दन्ति = अनुभव करते हैं; तथैकपात् = और एक भाग प्रकृति युक्त संसार है।",
-          "saral_hindi": "उस परमात्मा का तीन-चौथाई अंश 'त्रिपाद अमृत' है जिसे केवल तत्वदर्शी महर्षि ही जान पाते हैं। शेष एक-चौथाई अंश से यह भौतिक संसार बनता है।",
-          "phalit_sutra": "कुंडली में मोक्ष त्रिकोण (४, ८, १२ भाव) इसी त्रिपाद अमृत और आत्म-मुक्ति की यात्रा को दर्शाते हैं।"
-        },
-        {
-          "shloka_num": "श्लोक १२",
-          "topic": "वासुदेव एवं अव्यक्त शक्तियां",
-          "sanskrit": "व्यक्ताऽव्यक्तात्मकोविष्णुर्वासुदेवस्तुगीयते ।\nयदव्यक्तात्मको विष्णुः शक्तिद्वयसमन्वितः ॥ १२ ॥",
-          "word_meaning": "व्यक्ताऽव्यक्तात्मकः = व्यक्त व अव्यक्त दोनों रूपों वाले; वासुदेवः = वासुदेव कहे जाते हैं; शक्तिद्वयसमन्वितः = दो सूक्ष्म शक्तियों से युक्त होते हैं।",
-          "saral_hindi": "व्यक्त और अव्यक्त दोनों स्वरूपों में स्थित भगवान विष्णु ही 'वासुदेव' कहे जाते हैं। जब वे अव्यक्त रूप में होते हैं, तब वे दो सूक्ष्म शक्तियों से युक्त रहते हैं।",
-          "phalit_sutra": "लग्न जातक के व्यक्त (स्थूल शरीर) और अव्यक्त (आंतरिक संस्कार) दोनों का नियंत्रक है।"
-        },
-        {
-          "shloka_num": "श्लोक १३",
-          "topic": "श्री शक्ति और भू शक्ति",
-          "sanskrit": "व्यक्तात्मकस्त्रिभिर्युक्तःकथ्यतेऽनन्तशक्तिमान् ।\nसत्त्वप्रधाना श्रीशक्तिर्भूशक्तिश्च रजोगुणा ॥ १३ ॥",
-          "word_meaning": "व्यक्तात्मकः = व्यक्त रूप में; त्रिभिः युक्तः = तीन शक्तियों से युक्त; सत्त्वप्रधाना = सत्त्वगुण प्रधान श्रीशक्ति; भूशक्तिश्च रजोगुणा = तथा रजोगुण युक्त भूशक्ति।",
-          "saral_hindi": "जब वही अनंत शक्तिमान प्रभु व्यक्त स्वरूप में आते हैं, तब वे तीन प्रमुख शक्तियों से युक्त हो जाते हैं: पहली सत्त्वगुण-प्रधान 'श्री शक्ति' (लक्ष्मी) और दूसरी रजोगुण-प्रधान 'भू शक्ति' (पृथ्वी)।",
-          "phalit_sutra": "धन व ऐश्वर्य 'श्री शक्ति' (सत्त्व) से और भूमि व पराक्रम 'भू शक्ति' (रज) से प्राप्त होता है।"
-        },
-        {
-          "shloka_num": "श्लोक १४",
-          "topic": "नीला शक्ति (तमोगुण प्रधान)",
-          "sanskrit": "तमःप्रधाना नीलाख्या तिस्रः शक्तय ईरिताः ।\nवासुदेवस्तथा संकर्षणश्च प्रद्युम्न एव च ॥ १४ ॥",
-          "word_meaning": "तमःप्रधाना = तमोगुण प्रधान; नीलाख्या = नीला शक्ति (महाकाली); तिस्रः शक्तयः = तीन शक्तियां; ईरिताः = कही गई हैं।",
-          "saral_hindi": "तीसरी शक्ति तमोगुण-प्रधान 'नीला शक्ति' (महाकाली/दुर्गा) कही गई है। इस प्रकार त्रिगुणात्मक शक्तियों से युक्त होकर वे वासुदेव, संकर्षण और प्रद्युम्न रूप धारण करते हैं।",
-          "phalit_sutra": "गूढ़ रहस्यों, तंत्र और संकट-निवारण का कारक तमोगुण (नीला शक्ति) है, जो कुंडली के अष्टम भाव से संबंधित है।"
-        },
-        {
-          "shloka_num": "श्लोक १५",
-          "topic": "अनिरुद्ध स्वरूप एवं चतुर्व्यूह",
-          "sanskrit": "अनिरुद्ध इति प्रोक्ता मूर्तयश्चतस्र ईरिताः ।\nवासुदेवात्तु संकर्षणः संकर्षणात् प्रद्युम्नः ॥ १५ ॥",
-          "word_meaning": "अनिरुद्धः इति प्रोक्ता = अनिरुद्ध कहे गए हैं; मूर्तयः चतस्रः = ये चार मूर्तियां हैं; वासुदेवात् संकर्षणः = वासुदेव से संकर्षण; संकर्षणात् प्रद्युम्नः = संकर्षण से प्रद्युम्न।",
-          "saral_hindi": "चौथे स्वरूप भगवान 'अनिरुद्ध' कहे गए हैं। ये प्रभु की चार मुख्य मूर्तियां (चतुर्व्यूह) हैं। वासुदेव से संकर्षण और संकर्षण से प्रद्युम्न प्रकट हुए।",
-          "phalit_sutra": "चतुर्व्यूह का संबंध धर्म, अर्थ, काम, मोक्ष और कुंडली के चार मुख्य केंद्रों (१, ४, ७, १०) से है।"
-        },
-        {
-          "shloka_num": "श्लोक १६",
-          "topic": "अहंकार और तन्मात्राओं की उत्पत्ति",
-          "sanskrit": "प्रद्युम्नाच्चानिरुद्धोऽभूत्सर्वे शक्तिसमन्विताः ।\nसंकर्षणादहंकारस्तन्मात्राणि ततः परम् ॥ १६ ॥",
-          "word_meaning": "प्रद्युम्नात् च अनिरुद्धः = प्रद्युम्न से अनिरुद्ध बने; संकर्षणात् अहंकारः = संकर्षण से अहंकार हुआ; तन्मात्राणि ततः परम् = तत्पश्चात् सूक्ष्म तन्मात्राएं बनीं।",
-          "saral_hindi": "प्रद्युम्न से अनिरुद्ध प्रकट हुए। संकर्षण से मूल अहंकार और उसके बाद सूक्ष्म तन्मात्राएं (शब्द, स्पर्श, रूप, रस, गंध) उत्पन्न हुईं।",
-          "phalit_sutra": "अहंकार ही जीव के देह धारण का कारण है, जिसका विचार कुंडली में लग्न भाव से होता है।"
-        },
-        {
-          "shloka_num": "श्लोक १७",
-          "topic": "पंचमहाभूतों का प्रकटीकरण",
-          "sanskrit": "अहंकारात् समुत्पन्नाः खं वायुस्तेज आप उवी ।\nभूतेभ्यो जगदुत्पन्नं स्थावरं जङ्गमं तथा ॥ १७ ॥",
-          "word_meaning": "अहंकारात् समुत्पन्नाः = अहंकार से उत्पन्न हुए; खं = आकाश; वायुः = वायु; तेजः = अग्नि; आपः = जल; उर्वी = पृथ्वी; स्थावरं जङ्गमं = चर और अचर।",
-          "saral_hindi": "अहंकार से आकाश, वायु, अग्नि, जल और पृथ्वी—ये पाँच महाभूत प्रकट हुए। इन्हीं पंचभूतों के मिश्रण से संपूर्ण चर-अचर जगत बना।",
-          "phalit_sutra": "१२ राशियां पंचमहाभूतों पर आधारित हैं। तत्वों का संतुलन ही जातक का स्वभाव और स्वास्थ्य तय करता है।"
-        },
-        {
-          "shloka_num": "श्लोक १८",
-          "topic": "त्रिदेवों के कार्य विभाजन",
-          "sanskrit": "सत्त्वेन विष्णुः पालयति रजसा सृजति विधिः ।\nतमसा हरते शर्वः सृष्टेरेवं प्रकीर्तिता ॥ १८ ॥",
-          "word_meaning": "सत्त्वेन विष्णुः पालयति = सत्त्वगुण से विष्णु पालन करते हैं; रजसा सृजति विधिः = रजोगुण से ब्रह्मा रचते हैं; तमसा हरते शर्वः = तमोगुण से शिव संहार करते हैं।",
-          "saral_hindi": "सत्त्वगुण से विष्णु पालन करते हैं, रजोगुण से ब्रह्मा रचना करते हैं, और तमोगुण से शिव संहार करते हैं। इस प्रकार त्रिगुणों से सृष्टि का चक्र चलता है।",
-          "phalit_sutra": "रचना (रज), पोषण (सत्त्व) और परिवर्तन (तम) ही समय का त्रिकाल चक्र है।"
-        },
-        {
-          "shloka_num": "श्लोक १९",
-          "topic": "ग्रहों की अधीनता एवं कर्मफल",
-          "sanskrit": "ग्रहाधीनं जगत्सर्वं ग्रहाधीना नराधिपाः ।\nकालचक्रं ग्रहाधीनं ग्रहाः कर्मफलप्रदाः ॥ १९ ॥",
-          "word_meaning": "ग्रहाधीनं जगत् सर्वं = सारा संसार ग्रहों के अधीन है; ग्रहाधीना नराधिपाः = राजा भी ग्रहों के वश में हैं; ग्रहाः कर्मफलप्रदाः = ग्रह कर्मफल देने वाले हैं।",
-          "saral_hindi": "यह संपूर्ण जगत और बड़े-बड़े राजा भी ग्रहों के अधीन हैं। कालचक्र ग्रहों से बंधा है और ग्रह ही जीवों को उनके कर्मों का यथायोग्य फल देते हैं।",
-          "phalit_sutra": "ग्रह स्वयं शत्रु या मित्र नहीं होते; वे मात्र जातक के पूर्वकर्मों का परिणाम देने वाले न्यायकर्ता हैं।"
-        },
-        {
-          "shloka_num": "श्लोक २०",
-          "topic": "अध्याय १ की फलश्रुति",
-          "sanskrit": "इत्येतत् कथितं विप्र सृष्टिक्रममनुत्तमम् ।\nयज्ज्ञात्वा लभते ज्ञानं ज्योतिश्चक्रस्य शाश्वतम् ॥ २० ॥",
-          "word_meaning": "इति एतत् कथितं = इस प्रकार कहा गया; विप्र = हे विप्र मैत्रेय; सृष्टिक्रमम् अनुत्तमम् = सृष्टिक्रम का श्रेष्ठ रहस्य; लभते ज्ञानं = ज्ञान प्राप्त करता है।",
-          "saral_hindi": "हे विप्र मैत्रेय! इस प्रकार मैंने तुम्हें सृष्टिक्रम का सर्वोत्तम रहस्य बताया, जिसे जानकर साधक सनातन कालचक्र को समझने का अधिकारी बनता है।",
-          "phalit_sutra": "सृष्टिक्रम को समझे बिना कुंडली के सूक्ष्म फलित सूत्रों का सही प्रयोग संभव नहीं है।"
+    let rawItems = [];
+
+    async function loadChapter(num) {
+      const container = document.getElementById('cards-container');
+      const select = document.getElementById('ch-select');
+      const title = select.options[select.selectedIndex].text;
+      
+      document.getElementById('label-chapter').textContent = title;
+      document.getElementById('badge-count').textContent = 'लोड हो रहा है...';
+      document.getElementById('label-filtered').textContent = '';
+
+      container.innerHTML = `
+        <div class="bg-white p-8 rounded-2xl text-center border border-stone-200">
+          <p class="text-sm font-semibold text-stone-600">📜 सामग्री लोड हो रही है...</p>
+        </div>`;
+
+      try {
+        const fetchUrl = 'data/ch' + num + '.json?v=' + Date.now();
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+          throw new Error('HTTP ' + res.status + ' (फाइल नहीं मिली)');
         }
-      ],
-      "2": [
-        {
-          "shloka_num": "श्लोक १-२",
-          "topic": "भगवान विष्णु के अवतार एवं कर्मफल",
-          "sanskrit": "अथातोऽहं प्रवक्ष्यामि ग्रहाणां चरितं महत् ।\nयज्ज्ञात्वा सर्वशास्त्रज्ञो भवत्येव न संशयः ॥ १ ॥\nअव्यक्तात्मा स भगवान् विष्णुरव्यक्तसंज्ञकः ।\nजीवानां कर्मसिद्धयर्थमवतीर्णो महीतले ॥ २ ॥",
-          "word_meaning": "अहम् प्रवक्ष्यामि = मैं कहूँगा; ग्रहाणां चरितं महत् = ग्रहों का चरित्र; अव्यक्तात्मा भगवान् विष्णुः = भगवान विष्णु; जीवानां कर्मसिद्धयर्थम् = कर्मफल सिद्धि हेतु; अवतीर्णः महीतले = पृथ्वी पर अवतरित हुए।",
-          "saral_hindi": "पराशर जी बोले: हे मैत्रेय! अब मैं ग्रहों के उस चरित्र का वर्णन करता हूँ जिसे जानकर मनुष्य सर्वशास्त्रवेत्ता बनता है। अव्यक्त परमात्मा भगवान विष्णु ही जीवों के कर्मफल सिद्धि हेतु पृथ्वी पर अवतरित होते हैं।",
-          "phalit_sutra": "कुंडली में ग्रह मात्र भौतिक पिंड नहीं, बल्कि परमात्मा की अवतारी चेतना के संवाहक हैं।"
-        },
-        {
-          "shloka_num": "श्लोक ३-४",
-          "topic": "ग्रह एवं विष्णु के अवतार (राम, कृष्ण, नृसिंह आदि)",
-          "sanskrit": "रामोऽवतारा सूर्यस्य चन्द्रस्य यदुनायकः ।\nनृसिंहो भूमिसुतस्य बुद्धः सोमसुतस्य च ॥ ३ ॥\nवामनो विबुधेशस्य भार्गवो भार्गवस्य च ।\nकूर्मो भानुसुतस्यैव सैंहिकेयस्य शूकरः ॥ ४ ॥",
-          "word_meaning": "रामः अवतारा सूर्यस्य = राम सूर्य के अवतार हैं; चन्द्रस्य यदुनायकः = चंद्रमा के श्रीकृष्ण हैं; नृसिंहः भूमिसुतस्य = मंगल के नृसिंह हैं; बुद्धः सोमसुतस्य = बुध के बुद्ध हैं; वामनः विबुधेशस्य = गुरु के वामन हैं; भार्गवः भार्गवस्य = शुक्र के परशुराम हैं; कूर्मो भानुसुतस्य = शनि के कूर्म हैं; सैंहिकेयस्य शूकरः = राहु के वराह हैं।",
-          "saral_hindi": "सूर्य से श्रीराम, चंद्रमा से श्रीकृष्ण, मंगल से नृसिंह देव, बुध से बुद्ध देव, बृहस्पति से वामन देव, शुक्र से परशुराम जी, शनि से कूर्म (कच्छप), और राहु से वराह अवतार प्रकट हुए।",
-          "phalit_sutra": "ग्रह पीड़ा निवारण हेतु संबंधित अवतार की आराधना सर्वोत्तम है: सूर्य हेतु रामरक्षा स्तोत्र, चंद्र हेतु कृष्ण उपासना, मंगल हेतु नृसिंह कवच।"
-        },
-        {
-          "shloka_num": "श्लोक ५",
-          "topic": "केतु का मत्स्य अवतार एवं अन्य स्वरूप",
-          "sanskrit": "केतोर्मत्स्यावतारश्च ये चान्येऽपि गदाभृतः ।\nअंशांशास्ते समस्ताश्च ज्ञेया ज्ञानान्वितात्मभिः ॥ ५ ॥",
-          "word_meaning": "केतोः मत्स्यावतारः = केतु के मत्स्य अवतार हैं; ये चान्ये गदाभृतः = जो अन्य अवतार हैं; अंशांशाः ते समस्ताः = वे सब प्रभु के अंश हैं।",
-          "saral_hindi": "केतु के अवतार भगवान मत्स्य देव हैं। इसके अलावा भगवान विष्णु के जितने भी अन्य स्वरूप हैं, वे सब उनकी ही कलाओं और अंशों से प्रकट हुए हैं।",
-          "phalit_sutra": "केतु मोक्ष का कारक है; मत्स्य अवतार की भांति यह आत्मा को मोह रूपी प्रलय से पार ले जाता है।"
-        },
-        {
-          "shloka_num": "श्लोक ६",
-          "topic": "अवतार का प्रयोजन",
-          "sanskrit": "दुष्टानां च विनाशार्थं साधूनां रक्षणाय च ।\nधर्मसंस्थापनार्थाय जायन्ते ते युगे युगे ॥ ६ ॥",
-          "word_meaning": "दुष्टानां विनाशार्थं = दुष्टों के नाश के लिए; साधूनां रक्षणाय = साधुओं की रक्षा हेतु; धर्मसंस्थापनार्थाय = धर्म स्थापना के लिए; जायन्ते युगे युगे = वे प्रत्येक युग में अवतार लेते हैं।",
-          "saral_hindi": "दुष्टों के विनाश, सज्जनों की रक्षा, और धर्म की पुनः प्रतिष्ठा के लिए वे परमेश्वर युग-युग में अवतार धारण करते हैं।",
-          "phalit_sutra": "कुंडली में शुभ ग्रह जातक में सत्त्व और साधुता बढ़ाते हैं, जबकि पाप पीड़ित ग्रह अधर्म और संघर्ष उत्पन्न करते हैं।"
-        },
-        {
-          "shloka_num": "श्लोक ७",
-          "topic": "जीवों में परमात्मांश",
-          "sanskrit": "तेषामेवांशभूतास्तु जीवाः सर्वे चराचराः ।\nपरमात्मांशबाहुल्यं देवेष्विति विदुर्बुधाः ॥ ७ ॥",
-          "word_meaning
+        rawItems = await res.json();
+        document.getElementById('search-input').value = '';
+        displayCards(rawItems);
+      } catch (e) {
+        container.innerHTML = `
+          <div class="bg-white p-6 rounded-2xl text-center border border-rose-300 space-y-2">
+            <span class="text-3xl block">⚠️</span>
+            <p class="font-bold text-rose-800 text-sm">लोडिंग त्रुटि</p>
+            <p class="text-xs text-stone-600">कारण: <b>` + e.message + `</b></p>
+            <p class="text-[11px] text-stone-400 font-mono">पाथ: data/ch` + num + `.json</p>
+          </div>`;
+        document.getElementById('badge-count').textContent = 'त्रुटि';
+      }
+    }
+
+    function displayCards(items) {
+      const container = document.getElementById('cards-container');
+      document.getElementById('badge-count').textContent = 'कुल: ' + rawItems.length;
+      document.getElementById('label-filtered').textContent = 'दिख रहे हैं: ' + items.length;
+
+      if (!items || items.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl text-center text-stone-500 border border-stone-200">
+            <p class="text-sm font-medium">कोई श्लोक नहीं मिला।</p>
+          </div>`;
+        return;
+      }
+
+      let html = '';
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        html += `
+          <article class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+            <div class="bg-stone-100 px-4 py-2.5 flex items-center justify-between border-b border-stone-200">
+              <span class="text-xs font-bold bg-amber-900 text-amber-50 px-2.5 py-0.5 rounded-md">
+                ${item.shloka_num || ''}
+              </span>
+              <span class="text-xs font-semibold text-stone-700">${item.topic || ''}</span>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <div class="bg-amber-50 border-l-4 border-amber-800 p-3 rounded-r-xl">
+                <p class="text-amber-950 font-bold text-base leading-relaxed whitespace-pre-line">${item.sanskrit || ''}</p>
+              </div>
+
+              <details class="text-xs text-stone-600">
+                <summary class="cursor-pointer font-bold text-amber-800 hover:underline select-none">
+                  📖 पदच्छेद एवं शब्दार्थ (क्लिक करें)
+                </summary>
+                <div class="mt-2 p-2.5 bg-stone-50 rounded-lg border border-stone-200 text-stone-700 leading-relaxed">
+                  ${item.word_meaning || ''}
+                </div>
+              </details>
+
+              <div>
+                <span class="text-[11px] font-bold text-amber-900 uppercase block mb-0.5">सरल हिन्दी:</span>
+                <p class="text-sm text-stone-800 leading-relaxed">${item.saral_hindi || ''}</p>
+              </div>
+
+              <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl">
+                <strong class="text-xs text-emerald-950 block mb-0.5">💡 फलित नियम:</strong>
+                <p class="text-xs text-emerald-900 leading-relaxed">${item.phalit_sutra || ''}</p>
+              </div>
+            </div>
+          </article>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function doSearch() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      if (!q) {
+        displayCards(rawItems);
+        return;
+      }
+      const filtered = rawItems.filter(function(it) {
+        return (it.shloka_num && it.shloka_num.toLowerCase().includes(q)) ||
+               (it.topic && it.topic.toLowerCase().includes(q)) ||
+               (it.sanskrit && it.sanskrit.toLowerCase().includes(q)) ||
+               (it.saral_hindi && it.saral_hindi.toLowerCase().includes(q)) ||
+               (it.phalit_sutra && it.phalit_sutra.toLowerCase().includes(q));
+      });
+      displayCards(filtered);
+    }
+
+    document.getElementById('ch-select').addEventListener('change', function(e) {
+      loadChapter(e.target.value);
+    });
+
+    document.getElementById('search-input').addEventListener('input', doSearch);
+
+    // Initial load
+    loadChapter('3');
+  </script>
+</body>
+</html>
