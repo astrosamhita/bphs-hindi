@@ -3,162 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>सरल बृहत् पराशर होरा शास्त्र</title>
+  <title>सरल बृहत्पाराशर - ज्योतिष अध्ययन</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Yatra+One&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Mukta', sans-serif; }
+    .heading-font { font-family: 'Yatra One', cursive, sans-serif; }
   </style>
 </head>
-<body class="bg-amber-50 text-slate-900 min-h-screen">
+<body class="bg-stone-50 text-stone-900 min-h-screen pb-12">
 
-  <header class="bg-amber-950 text-white p-4 shadow-md sticky top-0 z-50">
-    <div class="max-w-xl mx-auto flex items-center justify-between">
-      <h1 class="text-lg font-bold">📖 बृहत्पाराशरहोराशास्त्रम्</h1>
-      <span class="text-xs bg-amber-800 text-amber-100 px-2.5 py-1 rounded-full uppercase font-medium">डिजिटल ग्रंथ</span>
+  <!-- Sticky Header -->
+  <header class="bg-amber-950 text-amber-50 shadow-md sticky top-0 z-50">
+    <div class="max-w-xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div>
+        <h1 class="text-lg font-bold tracking-wide flex items-center gap-2">
+          <span>📖</span> बृहत्पाराशर सरल ज्ञान
+        </h1>
+        <p class="text-[11px] text-amber-200">विद्यार्थियों हेतु प्रामाणिक फलित सूत्र</p>
+      </div>
+      <div class="text-right">
+        <span id="shloka-count" class="text-xs font-semibold bg-amber-900/80 border border-amber-700/60 px-2.5 py-1 rounded-full text-amber-100"></span>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-xl mx-auto p-4 space-y-4">
-    <!-- Intro Collapsible Overview (एक दृष्टि में) -->
-    <details class="bg-white border border-amber-300 rounded-xl p-4 shadow-sm group">
-      <summary class="font-bold text-amber-950 cursor-pointer flex justify-between items-center text-sm select-none">
-        <span>📜 बृहत्पाराशर : एक दृष्टि में (विषय-विस्तार)</span>
-        <span class="text-xs text-amber-700 bg-amber-100 px-2 py-0.5 rounded">देखें</span>
-      </summary>
-      <div class="mt-3 pt-3 border-t border-amber-100 text-xs text-slate-700 space-y-1.5 leading-relaxed">
-        <p>• भारतीय ज्योतिष के समस्त विषय ।</p>
-        <p>• अनेक स्थल अन्यत्र सर्वथा दुर्लभ ।</p>
-        <p>• अप्रकाश ग्रहों का भी सम्पूर्ण फल ।</p>
-        <p>• समस्त वर्गों का विस्तृत विवेचन ।</p>
-        <p>• राशि, ग्रह, नक्षत्र का सर्वविध प्रदर्शन ।</p>
-        <p>• नक्षत्र जातक नूतन व प्रामाणिक ।</p>
-        <p>• अनेक दशापद्धतियों का सोदाहरण विवेचन ।</p>
-        <p>• राशियों व ग्रहों की दृष्टि के भेद ।</p>
-        <p>• पद, उपपद, अर्गला व कारकांश ।</p>
-        <p>• कारक व कारकांश का विस्तृत प्रदर्शन ।</p>
-        <p>• सुदर्शन चक्र द्वारा अमोघ फल ।</p>
-        <p>• व्यवसाय निर्णय की आर्ष विधि ।</p>
-        <p>• योगकारक व कारक ग्रहों का निर्णय ।</p>
-        <p>• नाभस व सौर चान्द्र योग ।</p>
-        <p>• दशा—अन्तर्दशा प्रत्यन्तर सूक्ष्मदशा ।</p>
-        <p>• प्राण दशा का प्रामाणिक फल ।</p>
-        <p>• ग्रहों की अवस्थाओं का सम्पूर्ण फल ।</p>
-        <p>• काल चक्रदशा का विशेष खुलासा ।</p>
-        <p>• चरादि जैमिनीय दशाओं का फल ।</p>
-        <p>• अष्टकवर्ग : समग्र प्रस्तुति ।</p>
-        <p>• रश्मि विचार : फल निर्णय ।</p>
-        <p>• मुहूर्त के फुटकल विषय ।</p>
-        <p>• नष्ट जातक : शरीर लक्षण तिलविचार ।</p>
-        <p>• पूर्वशाप फल व निवारण ।</p>
-        <p>• ग्रह शान्ति, दोष शान्ति: सम्पूर्ण ।</p>
-      </div>
-    </details>
+  <main class="max-w-xl mx-auto px-4 pt-4 space-y-4">
 
-    <!-- Mangalacharan quote -->
-    <div class="bg-amber-100/70 border border-amber-300 p-3 rounded-xl text-xs text-amber-950 italic">
-      "...को प्रणाम करके ज्योतिष शास्त्र को यथावत् कहता हूँ, जैसा मैंने पूर्वकाल में ब्रह्मा जी के मुखारविन्द से सुना था।"
-    </div>
-
-    <!-- Search Bar & Counter -->
-    <div class="bg-white p-3 rounded-xl shadow-sm border border-amber-200">
+    <!-- Search & Chapter Filter -->
+    <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-stone-200 space-y-2">
       <input 
         type="text" 
         id="search" 
-        placeholder="खोजें (जैसे: अधिकारी, विष्णवे, श्लोक १२)..." 
-        class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
+        placeholder="श्लोक संख्या, शब्द या फलित सूत्र खोजें..." 
+        class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
         oninput="filterContent()"
       >
-      <div class="mt-2 text-right">
-        <span id="shloka-count" class="text-xs text-amber-900 font-semibold bg-amber-100 px-2 py-0.5 rounded-full"></span>
+      <div class="flex items-center justify-between text-xs text-stone-500 px-1 pt-1">
+        <span>💡 अध्याय १: सृष्टिक्रम वर्णन</span>
+        <span id="active-count" class="font-medium text-amber-900"></span>
       </div>
     </div>
 
-    <!-- Shloka Cards Container -->
+    <!-- Cards Container -->
     <div id="cards-container" class="space-y-4"></div>
+
   </main>
 
   <script>
-    const allData = [
+    // BPHS Sequential Shloka Database
+    const shlokasData = [
       {
         "id": 1,
         "chapter": "अध्याय १: सृष्टिक्रम",
-        "shloka_num": "श्लोक ७-८",
-        "topic": "ज्योतिष के अधिकारी",
-        "sanskrit": "शान्ताय गुरुभक्ताय सर्वदा सत्यवादिने ।\nआस्तिकाय प्रदातव्यं ततः श्रेयो ह्यवाप्स्यति ॥ ७ ॥\n\nन देयं परशिष्याय नास्तिकाय शठाय वा ।\nदत्ते प्रतिदिनं दुःखं जायते नात्र संशयः ॥ ८ ॥",
-        "saral_hindi": "शान्त चित्त वाले, गुरु के प्रति भक्तिभाव से युक्त, सदैव सत्य बोलने वाले, ईश्वर में विश्वास रखने वाले शिष्य को ही यह शास्त्र सिखाना चाहिए, इसी से कल्याण होता है। दूसरे के शिष्य, नास्तिक, शठ (कुटिल विचार वाले) शिष्य को इस शास्त्र का ज्ञान देने से सदैव दुःख ही प्राप्त होता है।",
-        "phalit_sutra": "विद्या व परामर्श सदैव सुपात्र और आस्तिक को ही दें। कुटिल भाव रखने वाले को दिया गया ज्ञान अंततः कष्टकारी सिद्ध होता है।"
+        "shloka_num": "श्लोक ७",
+        "topic": "सुपात्र शिष्य के लक्षण",
+        "sanskrit": "शान्ताय गुरुभक्ताय सर्वदा सत्यवादिने ।\nआस्तिकाय प्रदातव्यं ततः श्रेयो ह्यवाप्स्यति ॥ ७ ॥",
+        "word_meaning": "शान्ताय = शांत मन वाले को; गुरुभक्ताय = गुरु में निष्ठा रखने वाले को; सर्वदा = हमेशा; सत्यवादिने = सत्य बोलने वाले को; आस्तिकाय = ईश्वर और वेदों पर विश्वास रखने वाले को; प्रदातव्यं = देना चाहिए; ततः = जिससे; श्रेयः = कल्याण; अवाप्स्यति = प्राप्त होता है।",
+        "saral_hindi": "यह ज्योतिष विद्या केवल ऐसे शिष्य को सिखानी चाहिए जिसका चित्त शांत हो, जो गुरु के प्रति निष्ठावान हो, सदा सत्य बोलने का आचरण रखता हो और जिसका ईश्वर में पूर्ण विश्वास हो। ऐसे योग्य पात्र को ज्ञान देने से सिखाने वाले और सीखने वाले दोनों का कल्याण होता है।",
+        "phalit_sutra": "विद्या का अधिकार केवल विनम्र व सत्यनिष्ठ व्यक्ति को है। ज्योतिष परामर्श या शिक्षण कभी भी अहंकारी अथवा अविश्वासी व्यक्ति को नहीं देना चाहिए।"
       },
       {
         "id": 2,
         "chapter": "अध्याय १: सृष्टिक्रम",
-        "shloka_num": "श्लोक ९-११",
-        "topic": "सृष्टिक्रम एवं विष्णु स्वरूप",
-        "sanskrit": "एकेऽव्यक्तात्मकोविष्णुborderनादिःप्रभुरीश्वरः ।\nशुद्धसत्त्वो जगत्स्वामी निर्गुणस्त्रिगुणान्वितः ॥ ९ ॥\n\nसंसारकारकः श्रीमान्निमित्तात्मा प्रतापवान् ।\nएकांशेन जगत्सर्वं सृजत्यवति लीलया ॥ १० ॥\n\nत्रिपादं तस्य देवस्य ह्यमृतं तत्त्वदर्शिनः ।\nविन्दन्ति तत्प्रमाणं च सप्रधानं तथैकपात् ॥ ११ ॥",
-        "saral_hindi": "एक, अव्यक्त, आत्मा, अनादि, प्रभु, ईश्वर, शुद्ध सत्त्व युक्त, संसार का स्वामी, निर्गुण लेकिन सत्त्व, रजः तम इन तीन गुणों से युक्त, समस्त संसार का रचयिता, परम प्रतापी, श्रीमान् भगवान् विष्णु अपने एक चौथाई अंश से संसार को निर्मित करके, अपनी लीला (इच्छा मात्र से, प्रयत्नपूर्वक नहीं) से इसका पालन पोषण भी करता है। इन्हीं व्यक्ताव्यक्त, समस्तगुण-गणभूषित भगवान् विष्णु के शेष त्रिपाद अंश (तीन चौथाई) अमृत रूप से अव्यक्त परब्रह्म रूप से स्थित है, जिसे तत्त्वदर्शी लोग ही जानते हैं।",
-        "phalit_sutra": "दृश्यमान संपूर्ण चराचर जगत परमात्मा के केवल एक-चौथाई अंश (एकपाद) में स्थित है; शेष त्रिपाद अव्यक्त चैतन्य है।"
+        "shloka_num": "श्लोक ८",
+        "topic": "अपात्र को विद्या देने का दोष",
+        "sanskrit": "न देयं परशिष्याय नास्तिकाय शठाय वा ।\nदत्ते प्रतिदिनं दुःखं जायते नात्र संशयः ॥ ८ ॥",
+        "word_meaning": "न देयं = नहीं देना चाहिए; परशिष्याय = दूसरे के शिष्य को; नास्तिकाय = नास्तिक को; शठाय = कपटी/धूर्त को; वा = अथवा; दत्ते = देने पर; प्रतिदिनं = हर रोज; दुःखं = कष्ट/पीड़ा; जायते = उत्पन्न होती है; न अत्र संशयः = इसमें कोई संशय नहीं है।",
+        "saral_hindi": "जो दूसरे का शिष्य हो, जो ईश्वर और परलोक को न मानता हो (नास्तिक), अथवा जो कुटिल व कपटी विचार वाला हो—उसे इस विद्या का उपदेश कभी नहीं देना चाहिए। ऐसे अपात्र व्यक्ति को ज्ञान देने से प्रतिदिन केवल दुःख और अशांति ही प्राप्त होती है।",
+        "phalit_sutra": "अपात्र व्यक्ति गूढ़ ज्योतिष ज्ञान का दुरुपयोग करके केवल समाज और स्वयं के लिए संकट उत्पन्न करता है।"
       },
       {
         "id": 3,
         "chapter": "अध्याय १: सृष्टिक्रम",
-        "shloka_num": "श्लोक १२-१३",
-        "topic": "व्यक्ताव्यक्त विष्णु एवं त्रि-शक्ति स्वरूप",
-        "sanskrit": "व्यक्ताऽव्यक्तात्मकोविष्णुर्वासुदेवस्तुगीयते ।\nयदव्यक्तात्मको विष्णुः शक्तिद्वयसमन्वितः ॥ १२ ॥\n\nव्यक्तात्मकस्त्रिभिर्युक्तःकथ्यतेऽनन्तशक्तिमान् ।\nसत्त्वप्रधाना श्रीशक्तिर्भूशक्तिश्च रजोगुणा ॥ १३ ॥",
-        "saral_hindi": "व्यक्ताव्यक्त स्वरूप वाले भगवान् विष्णु ही वासुदेव कहे जाते हैं। जब वे अव्यक्तात्मक होते हैं तब दो शक्तियों से समन्वित होते हैं, और जब व्यक्तात्मक होते हैं तब अनन्त शक्तिमान प्रभु तीन शक्तियों से युक्त कहे जाते हैं। इसमें सत्त्वप्रधाना 'श्रीशक्ति' और रजोगुणा 'भूशक्ति' कही गई है।",
-        "phalit_sutra": "सृष्टि का संचालन त्रिगुणमयी शक्तियों के माध्यम से होता है—सत्त्व का अधिष्ठान श्री (लक्ष्मी) तथा रज का अधिष्ठान भू (पृथ्वी) शक्ति है।"
+        "shloka_num": "श्लोक ९",
+        "topic": "परमब्रह्म भगवान विष्णु का स्वरूप",
+        "sanskrit": "एकेऽव्यक्तात्मकोविष्णुरनादिः प्रभुरीश्वरः ।\nशुद्धसत्त्वो जगत्स्वामी निर्गुणस्त्रिगुणान्वितः ॥ ९ ॥",
+        "word_meaning": "एकः = अद्वितीय; अव्यक्तात्मकः = इंद्रियों से परे; विष्णुः = सर्वव्यापी प्रभु; अनादिः = जिसका कोई आदि (शुरुआत) न हो; ईश्वरः = सर्वसमर्थ नियंता; शुद्धसत्त्वः = विशुद्ध सत्त्वगुण से युक्त; जगत्स्वामी = संपूर्ण ब्रह्मांड के स्वामी; निर्गुणः = उपाधियों से रहित; त्रिगुणान्वितः = तीनों गुणों को धारण करने वाले।",
+        "saral_hindi": "भगवान विष्णु ही इस संपूर्ण चराचर के मूल आधार हैं। वे अनादि, सर्वव्यापी, अव्यक्त और सबके स्वामी हैं। वे मूल रूप से निर्गुण (माया के बंधनों से परे) हैं, फिर भी संसार के संचालन हेतु सत्त्व, रज और तम—इन तीनों गुणों को धारण करते हैं।",
+        "phalit_sutra": "ज्योतिष में सूर्य, चंद्र आदि नवग्रह इन्हीं परमचेतना रूपी विष्णु के विभिन्न अंगों और शक्तियों का प्रतिनिधित्व करते हैं।"
+      },
+      {
+        "id": 4,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक १०",
+        "topic": "सृष्टि की उत्पत्ति एवं लीला",
+        "sanskrit": "संसारकारकः श्रीमान्निमित्तात्मा प्रतापवान् ।\nएकांशेन जगत्सर्वं सृजत्यवति लीलया ॥ १० ॥",
+        "word_meaning": "संसारकारकः = संसार को रचने वाले; श्रीमान् = ऐश्वर्यवान; निमित्तात्मा = निमित्त कारण; प्रतापवान् = महाप्रतापी; एकांशेन = अपने एक-चौथाई अंश मात्र से; जगत्सर्वं = समस्त संसार को; सृजति = रचते हैं; अवति = पालन करते हैं; लीलया = लीला मात्र (सहज इच्छा) से।",
+        "saral_hindi": "वे परम ऐश्वर्यशाली और प्रतापी श्रीहरि ही संपूर्ण सृष्टि के निमित्त कारण हैं। उन्होंने किसी भारी परिश्रम से नहीं, बल्कि अपनी इच्छा मात्र (लीला) से अपने एक-चौथाई (एक पाद) अंश से इस दृश्यमान संपूर्ण ब्रह्मांड को रचा है और वे ही इसका पालन-पोषण करते हैं।",
+        "phalit_sutra": "समस्त भौतिक ब्रह्मांड, सौरमंडल और ग्रह ईश्वर के केवल एक अंश में स्थित हैं।"
+      },
+      {
+        "id": 5,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक ११",
+        "topic": "त्रिपाद अमृत एवं एकपाद प्रपंच",
+        "sanskrit": "त्रिपादं तस्य देवस्य ह्यमृतं तत्त्वदर्शिनः ।\nविन्दन्ति तत्प्रमाणं च सप्रधानं तथैकपात् ॥ ११ ॥",
+        "word_meaning": "त्रिपादं = तीन चौथाई भाग; तस्य देवस्य = उस परमेश्वर का; अमृतं = नित्य अविनाशी स्वरूप; तत्त्वदर्शिनः = तत्व को जानने वाले ज्ञानी; विन्दन्ति = जानते हैं; तत्प्रमाणं = उसके रहस्य को; तथैकपात् = तथा एक भाग प्रकृति युक्त संसार है।",
+        "saral_hindi": "उस परमेश्वर का तीन-चौथाई अंश 'त्रिपाद अमृत' कहलाता है, जो नित्य, अविनाशी और अव्यक्त परब्रह्म रूप में स्थित रहता है, जिसे केवल तत्वदर्शी महर्षि ही जान पाते हैं। शेष एक-चौथाई अंश प्रकृति (प्रधान) से युक्त होकर यह दृश्यमान संसार बनता है।",
+        "phalit_sutra": "आत्मा और सूक्ष्म ऊर्जा (त्रिपाद) को समझना ही उच्च ज्योतिषीय योगों (जैसे मोक्ष त्रिकोण - ४, ८, १२ भाव) को समझने की कुंजी है।"
+      },
+      {
+        "id": 6,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक १२",
+        "topic": "वासुदेव एवं अव्यक्त शक्तियां",
+        "sanskrit": "व्यक्ताऽव्यक्तात्मकोविष्णुर्वासुदेवस्तुगीयते ।\nयदव्यक्तात्मको विष्णुः शक्तिद्वयसमन्वितः ॥ १२ ॥",
+        "word_meaning": "व्यक्ता-अव्यक्तात्मकः = व्यक्त और अव्यक्त दोनों रूपों वाले; वासुदेवः = सर्वत्र वास करने वाले देव; उच्यते/गीयते = कहे जाते हैं; यत् = जब; अव्यक्तात्मकः = अव्यक्त स्वरूप में होते हैं; शक्ति-द्वय-समन्वितः = दो शक्तियों से संयुक्त रहते हैं।",
+        "saral_hindi": "व्यक्त (दिखने वाला) और अव्यक्त (अदृश्य) दोनों स्वरूपों में स्थित भगवान विष्णु को ही 'वासुदेव' कहा गया है। जब वे अव्यक्त स्वरूप में होते हैं, तब वे दो मुख्य सूक्ष्म शक्तियों से युक्त रहते हैं।",
+        "phalit_sutra": "वासुदेव चेतना ही केंद्र है। कुंडली में लग्न और लग्नेश जातक के व्यक्त और अव्यक्त दोनों सामर्थ्य का निर्धारण करते हैं।"
+      },
+      {
+        "id": 7,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक १३",
+        "topic": "भगवान विष्णु की तीन महाशक्तियां",
+        "sanskrit": "व्यक्तात्मकस्त्रिभिर्युक्तःकथ्यतेऽनन्तशक्तिमान् ।\nसत्त्वप्रधाना श्रीशक्तिर्भूशक्तिश्च रजोगुणा ॥ १३ ॥",
+        "word_meaning": "व्यक्तात्मकः = व्यक्त दशा में; त्रिभिः युक्तः = तीन शक्तियों से संयुक्त; कथ्यते = कहे जाते हैं; अनन्तशक्तिमान् = अनंत शक्ति से संपन्न; सत्त्वप्रधाना = सत्त्वगुण प्रधान; श्रीशक्तिः = लक्ष्मी शक्ति; भूशक्तिः च = और भू (पृथ्वी) शक्ति; रजोगुणा = रजोगुण से युक्त।",
+        "saral_hindi": "जब वही अनंत शक्तिमान भगवान व्यक्त (सृष्टि निर्माण) रूप में आते हैं, तब वे तीन प्रमुख शक्तियों से समन्वित हो जाते हैं: पहली सत्त्वगुण-प्रधान 'श्री शक्ति' (लक्ष्मी - पोषण व प्रकाश) और दूसरी रजोगुण-प्रधान 'भू शक्ति' (पृथ्वी - गति व आधार)।",
+        "phalit_sutra": "कुंडली में 'श्री' (धन, संपदा, शुभता) सत्त्वगुण से प्राप्त होती है, और 'भू' (स्थिर संपत्ति, भूमि, कर्म) रजोगुण के पराक्रम से सिद्ध होती है।"
       }
     ];
 
-    function renderCards(items) {
-      const countEl = document.getElementById('shloka-count');
-      if (countEl) {
-        countEl.textContent = `कुल श्लोक सेट: ${items.length} / ${allData.length}`;
-      }
+    function renderShlokas(items) {
+      const countBadge = document.getElementById('shloka-count');
+      const activeText = document.getElementById('active-count');
+      if (countBadge) countBadge.textContent = `कुल पाठ: ${items.length}`;
+      if (activeText) activeText.textContent = `दिख रहे हैं: ${items.length} / ${shlokasData.length}`;
 
       const container = document.getElementById('cards-container');
       if (!items || items.length === 0) {
-        container.innerHTML = '<p class="text-center text-slate-500 py-8 text-sm">कोई परिणाम नहीं मिला।</p>';
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl text-center text-stone-500 border border-stone-200">
+            <span class="text-3xl block mb-2">🔍</span>
+            <p class="font-medium text-sm">कोई श्लोक नहीं मिला।</p>
+          </div>`;
         return;
       }
 
       container.innerHTML = items.map(item => `
-        <article class="bg-white p-5 rounded-xl shadow-sm border border-amber-200 space-y-3">
-          <div class="flex items-center justify-between border-b border-amber-100 pb-2">
-            <span class="text-xs font-bold uppercase bg-amber-100 text-amber-900 px-2 py-0.5 rounded">${item.shloka_num}</span>
-            <span class="text-xs text-slate-600 font-semibold">${item.topic}</span>
+        <article class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden hover:border-amber-400 transition-colors">
+          
+          <!-- Card Header -->
+          <div class="bg-stone-100/70 px-4 py-2.5 flex items-center justify-between border-b border-stone-200">
+            <span class="text-xs font-bold bg-amber-900 text-amber-100 px-2.5 py-0.5 rounded-md">
+              ${item.shloka_num}
+            </span>
+            <span class="text-xs font-semibold text-stone-600">${item.topic}</span>
           </div>
 
-          <div class="bg-amber-50/80 border-l-4 border-amber-800 p-3 rounded-r-lg">
-            <p class="text-sm text-amber-950 font-semibold italic leading-relaxed whitespace-pre-line">${item.sanskrit}</p>
+          <div class="p-4 space-y-3.5">
+            <!-- Sanskrit Verse -->
+            <div class="bg-amber-50/70 border-l-4 border-amber-800 p-3 rounded-r-xl">
+              <p class="text-amber-950 font-semibold text-base leading-relaxed whitespace-pre-line tracking-wide">
+                ${item.sanskrit}
+              </p>
+            </div>
+
+            <!-- Word-by-word Breakdown (Collapsible for students) -->
+            <details class="text-xs text-stone-600 group">
+              <summary class="cursor-pointer text-amber-800 font-semibold flex items-center gap-1 select-none hover:underline">
+                <span>📖 पदच्छेद एवं शब्दार्थ (विस्तार देखें)</span>
+              </summary>
+              <div class="mt-2 p-2.5 bg-stone-50 rounded-lg border border-stone-200 leading-relaxed text-stone-700">
+                ${item.word_meaning}
+              </div>
+            </details>
+
+            <!-- Easy Hindi Explanation -->
+            <div>
+              <span class="text-[11px] font-bold text-amber-900 tracking-wider uppercase block mb-1">
+                सरल हिन्दी व्याख्या:
+              </span>
+              <p class="text-sm text-stone-800 leading-relaxed">
+                ${item.saral_hindi}
+              </p>
+            </div>
+
+            <!-- Practical Astrology Rule -->
+            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-start gap-2.5">
+              <span class="text-emerald-700 text-base leading-none mt-0.5">💡</span>
+              <div>
+                <strong class="text-xs text-emerald-950 block mb-0.5">फलित ज्योतिष सूत्र:</strong>
+                <p class="text-xs text-emerald-900 leading-relaxed">${item.phalit_sutra}</p>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">सरल हिंदी व्याख्या</h3>
-            <p class="text-slate-800 text-sm leading-relaxed">${item.saral_hindi}</p>
-          </div>
-
-          <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-lg flex items-start space-x-2">
-            <span class="text-emerald-700 font-bold text-sm leading-none mt-0.5">💡</span>
-            <p class="text-xs text-emerald-950"><strong>फलित रहस्य:</strong> ${item.phalit_sutra}</p>
-          </div>
         </article>
       `).join('');
     }
 
     function filterContent() {
-      const query = document.getElementById('search').value.toLowerCase().trim();
-      const filtered = allData.filter(item => 
-        item.topic.toLowerCase().includes(query) ||
-        item.saral_hindi.toLowerCase().includes(query) ||
-        item.sanskrit.toLowerCase().includes(query) ||
-        item.shloka_num.toLowerCase().includes(query)
+      const q = document.getElementById('search').value.toLowerCase().trim();
+      const filtered = shlokasData.filter(item => 
+        item.shloka_num.toLowerCase().includes(q) ||
+        item.topic.toLowerCase().includes(q) ||
+        item.sanskrit.toLowerCase().includes(q) ||
+        item.saral_hindi.toLowerCase().includes(q) ||
+        item.phalit_sutra.toLowerCase().includes(q)
       );
-      renderCards(filtered);
+      renderShlokas(filtered);
     }
 
-    renderCards(allData);
+    // Initialize
+    renderShlokas(shlokasData);
   </script>
 </body>
 </html>
