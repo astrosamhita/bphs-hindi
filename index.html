@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>सरल बृहत् पराशर होरा शास्त्र</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Mukta', sans-serif; }
+  </style>
+</head>
+<body class="bg-amber-50 text-slate-900 min-h-screen">
+
+  <header class="bg-amber-950 text-white p-4 shadow-md sticky top-0 z-50">
+    <div class="max-w-xl mx-auto flex items-center justify-between">
+      <h1 class="text-lg font-bold">📖 सरल बृहत् पराशर</h1>
+      <span class="text-xs bg-amber-800 text-amber-100 px-2.5 py-1 rounded-full uppercase font-medium">Live App</span>
+    </div>
+  </header>
+
+  <main class="max-w-xl mx-auto p-4 space-y-4">
+    <!-- Search Bar -->
+    <div class="bg-white p-3 rounded-xl shadow-sm border border-amber-200">
+      <input 
+        type="text" 
+        id="search" 
+        placeholder="खोजें (जैसे: अधिकारी, विष्णु, श्लोक ७)..." 
+        class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
+        oninput="filterContent()"
+      >
+    </div>
+
+    <!-- Shloka Cards Container -->
+    <div id="cards-container" class="space-y-4"></div>
+  </main>
+
+  <script>
+    const allData = [
+      {
+        "id": 1,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक ७-८",
+        "topic": "ज्योतिष के अधिकारी",
+        "sanskrit": "शान्ताय गुरुभक्ताय सर्वदा सत्यवादिने ।\nआस्तिकाय प्रदातव्यं ततः श्रेयो ह्यवाप्स्यति ॥ ७ ॥\nन देयं परशिष्याय नास्तिकाय शठाय वा ।\nदत्ते प्रतिदिनं दुःखं जायते नात्र संशयः ॥ ८ ॥",
+        "saral_hindi": "यह ज्ञान केवल उस व्यक्ति को सिखाना चाहिए जिसका स्वभाव शांत हो, जो गुरु के प्रति आदर भाव रखता हो, हमेशा सच बोलता हो और जिसका ईश्वर पर सच्चा विश्वास हो। किसी कुटिल, धोखेबाज़ या नास्तिक व्यक्ति को यह विद्या सिखाने से केवल दुख और अशांति ही पैदा होती है।",
+        "phalit_sutra": "ज्ञान देने या परामर्श देने से पहले सामने वाले की नीयत और आस्तिकता की परख करना अनिवार्य नियम है।"
+      },
+      {
+        "id": 2,
+        "chapter": "अध्याय १: सृष्टिक्रम",
+        "shloka_num": "श्लोक ९-११",
+        "topic": "सृष्टि की उत्पत्ति एवं भगवान विष्णु का स्वरूप",
+        "sanskrit": "एकेऽव्यक्तात्मकोविष्णुरनादिः प्रभुरीश्वरः ।\nशुद्धसत्त्वो जगत्स्वामी निर्गुणस्त्रिगुणान्वितः ॥ ९ ॥\nसंसारकारकः श्रीमान्निमित्तात्मा प्रतापवान् ।\nएकांशेन जगत्सर्वं सृजत्यवति लीलया ॥ १० ॥",
+        "saral_hindi": "भगवान विष्णु ही इस संसार के एकमात्र मूल आधार हैं। वे अजन्मा और निर्गुण होते हुए भी तीनों गुणों (सत्त्व, रज, तम) को धारण करते हैं। उन्होंने किसी कठिन परिश्रम से नहीं, बल्कि केवल अपनी इच्छा मात्र (लीला) से अपने एक-चौथाई अंश से इस पूरे ब्रह्मांड की रचना की है और इसका पालन करते हैं।",
+        "phalit_sutra": "दृश्यमान जगत और सभी ग्रह-नक्षत्र ईश्वरीय चेतना के एक अंश में स्थित हैं। ज्योतिष इसी दैवीय व्यवस्था को समझने का माध्यम है।"
+      }
+    ];
+
+    function renderCards(items) {
+      const container = document.getElementById('cards-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<p class="text-center text-slate-500 py-8 text-sm">कोई परिणाम नहीं मिला।</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <article class="bg-white p-5 rounded-xl shadow-sm border border-amber-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase bg-amber-100 text-amber-900 px-2 py-0.5 rounded">${item.shloka_num}</span>
+            <span class="text-xs text-slate-500 font-medium">${item.topic}</span>
+          </div>
+
+          <div class="bg-amber-50 border-l-4 border-amber-800 p-3 rounded-r-lg">
+            <p class="text-sm text-amber-950 font-semibold italic whitespace-pre-line">${item.sanskrit}</p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">सरल हिंदी व्याख्या</h3>
+            <p class="text-slate-800 text-sm leading-relaxed">${item.saral_hindi}</p>
+          </div>
+
+          <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-lg flex items-start space-x-2">
+            <span class="text-emerald-700 font-bold text-sm">💡</span>
+            <p class="text-xs text-emerald-950"><strong>फलित नियम:</strong> ${item.phalit_sutra}</p>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filterContent() {
+      const query = document.getElementById('search').value.toLowerCase().trim();
+      const filtered = allData.filter(item => 
+        item.topic.toLowerCase().includes(query) ||
+        item.saral_hindi.toLowerCase().includes(query) ||
+        item.sanskrit.toLowerCase().includes(query) ||
+        item.shloka_num.toLowerCase().includes(query)
+      );
+      renderCards(filtered);
+    }
+
+    renderCards(allData);
+  </script>
+</body>
+</html>
 
