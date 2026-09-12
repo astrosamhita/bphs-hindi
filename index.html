@@ -12,13 +12,14 @@
 </head>
 <body class="bg-stone-50 text-stone-900 min-h-screen pb-12">
 
+  <!-- Header -->
   <header class="bg-amber-950 text-amber-50 shadow-md sticky top-0 z-50">
     <div class="max-w-xl mx-auto px-4 py-3.5 flex items-center justify-between">
       <div>
         <h1 class="text-lg font-bold tracking-wide flex items-center gap-2">
           <span>📖</span> बृहत्पाराशर सरल ज्ञान
         </h1>
-        <p class="text-[11px] text-amber-200">विद्यार्थियों हेतु प्रामाणिक फलित सूत्र</p>
+        <p class="text-[11px] text-amber-200">प्रथम खण्ड (अध्याय १ - ४५) : सम्पूर्ण फलित सूत्र</p>
       </div>
       <div class="text-right">
         <span id="shloka-count" class="text-xs font-semibold bg-amber-900 border border-amber-700 px-2.5 py-1 rounded-full text-amber-100"></span>
@@ -27,84 +28,137 @@
   </header>
 
   <main class="max-w-xl mx-auto px-4 pt-4 space-y-4">
+
+    <!-- Controls -->
     <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-stone-200 space-y-3">
       <div>
         <label for="chapter-select" class="block text-[11px] font-bold text-amber-900 uppercase tracking-wider mb-1">
-          अध्याय चुनें:
+          अध्याय चुनें (कुल ४५ अध्याय):
         </label>
         <select 
           id="chapter-select" 
           class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm font-semibold text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-800"
-          onchange="filterContent()"
+          onchange="switchChapter(this.value)"
         >
-          <option value="all">📚 सम्पूर्ण उपलब्ध श्लोक (सभी अध्याय)</option>
+          <!-- Chapters 1 to 45 -->
+          <optgroup label="भाग १: मूल आधार एवं स्वरूप">
+            <option value="1">अध्याय १ : सृष्टिक्रम वर्णन</option>
+            <option value="2">अध्याय २ : सृष्टि-स्थिति एवं ग्रह-अवतार</option>
+            <option value="3" selected>अध्याय ३ : ग्रह-स्वरूप एवं लक्षण</option>
+            <option value="4">अध्याय ४ : राशि-स्वरूप विवेचन</option>
+            <option value="5">अध्याय ५ : विशेष लग्न साधन</option>
+            <option value="6">अध्याय ६ : षोडशवर्ग विवेक</option>
+            <option value="7">अध्याय ७ : षोडशवर्ग-बल एवं दृष्टि</option>
+          </optgroup>
+          <optgroup label="भाग २: द्वादश भाव विवेचन">
+            <option value="8">अध्याय ८ : कारकाध्याय (आत्मकारक आदि)</option>
+            <option value="9">अध्याय ९ : कारकांश फल</option>
+            <option value="10">अध्याय १० : आरूढ़ लग्न एवं पद विचार</option>
+            <option value="11">अध्याय ११ : उपपद विचार</option>
+            <option value="12">अध्याय १२ : अर्गला विवेचन</option>
+            <option value="13">अध्याय १३ : प्रथम भाव (तनु भाव) फल</option>
+            <option value="14">अध्याय १४ : द्वितीय भाव (धन भाव) फल</option>
+            <option value="15">अध्याय १५ : तृतीय भाव (सहज भाव) फल</option>
+            <option value="16">अध्याय १६ : चतुर्थ भाव (सुख भाव) फल</option>
+            <option value="17">अध्याय १७ : पञ्चम भाव (पुत्र/विद्या भाव) फल</option>
+            <option value="18">अध्याय १८ : षष्ठ भाव (रिपु/रोग भाव) फल</option>
+            <option value="19">अध्याय १९ : सप्तम भाव (जाया भाव) फल</option>
+            <option value="20">अध्याय २० : अष्टम भाव (आयु भाव) फल</option>
+            <option value="21">अध्याय २१ : नवम भाव (भाग्य भाव) फल</option>
+            <option value="22">अध्याय २२ : दशम भाव (कर्म भाव) फल</option>
+            <option value="23">अध्याय २३ : एकादश भाव (लाभ भाव) फल</option>
+            <option value="24">अध्याय २४ : द्वादश भाव (व्यय भाव) फल</option>
+          </optgroup>
+          <optgroup label="भाग ३: विशिष्ट योग एवं राजयोग">
+            <option value="25">अध्याय २५ : भावेश फल विवेचन</option>
+            <option value="26">अध्याय २६ : अप्रकाश ग्रह एवं उपग्रह फल</option>
+            <option value="27">अध्याय २७ : उपग्रह साधन एवं फल</option>
+            <option value="28">अध्याय २८ : रश्मि विचार</option>
+            <option value="29">अध्याय २९ : शुभाशुभ योग विवेक</option>
+            <option value="30">अध्याय ३० : चन्द्र योग (अनफा, सुनफा आदि)</option>
+            <option value="31">अध्याय ३१ : सूर्य योग (वेसि, वासि आदि)</option>
+            <option value="32">अध्याय ३२ : राजयोग अध्याय</option>
+            <option value="33">अध्याय ३३ : राजयोग भंग एवं दरिद्र योग</option>
+            <option value="34">अध्याय ३४ : विशिष्ट योगकारक ग्रह</option>
+            <option value="35">अध्याय ३५ : नाभस योग विवेचन</option>
+          </optgroup>
+          <optgroup label="भाग ४: आयु, दशा एवं मारक निर्णय">
+            <option value="36">अध्याय ३६ : चन्द्र-अरिष्ट विचार</option>
+            <option value="37">अध्याय ३७ : अरिष्ट-भंग योग</option>
+            <option value="38">अध्याय ३८ : आयुर्गणना (पिण्डायु)</option>
+            <option value="39">अध्याय ३९ : अंशायु साधन</option>
+            <option value="40">अध्याय ४० : जीवशर्मायु साधन</option>
+            <option value="41">अध्याय ४१ : नैसर्गिक आयु साधन</option>
+            <option value="42">अध्याय ४२ : अष्टकवर्ग आयु साधन</option>
+            <option value="43">अध्याय ४३ : मारक भेद एवं निर्णय</option>
+            <option value="44">अध्याय ४४ : मारक दशा विचार</option>
+            <option value="45">अध्याय ४५ : मारक-ग्रह शान्ति विधान</option>
+          </optgroup>
         </select>
       </div>
 
       <input 
         type="text" 
         id="search" 
-        placeholder="श्लोक संख्या, ग्रह, अवतार या फलित नियम खोजें..." 
+        placeholder="श्लोक संख्या, ग्रह, योग या फलित नियम खोजें..." 
         class="w-full px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-800"
-        oninput="filterContent()"
+        oninput="filterCurrentChapter()"
       >
 
       <div class="flex items-center justify-between text-xs text-stone-500 px-1">
-        <span id="current-chapter-label" class="font-medium text-amber-950"></span>
+        <span id="current-chapter-title" class="font-semibold text-amber-950"></span>
         <span id="active-count" class="font-semibold text-amber-900"></span>
       </div>
     </div>
 
-    <div id="cards-container" class="space-y-4">
-      <p class="text-center text-stone-500 py-8 text-sm">सामग्री लोड हो रही है...</p>
-    </div>
+    <!-- Shloka Cards Output -->
+    <div id="cards-container" class="space-y-4"></div>
+
   </main>
 
   <script>
-    let allShlokas = [];
+    let currentChapterData = [];
 
-    async function loadData() {
+    async function switchChapter(chNum) {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = `
+        <div class="bg-white p-8 rounded-2xl text-center text-stone-500 border border-stone-200">
+          <span class="text-2xl block mb-2 animate-bounce">📜</span>
+          <p class="font-medium text-sm">अध्याय लोड हो रहा है...</p>
+        </div>`;
+
       try {
-        const res = await fetch('content.json?v=' + Date.now());
-        allShlokas = await res.json();
-        setupDropdown();
-        filterContent();
-      } catch (e) {
-        document.getElementById('cards-container').innerHTML = 
-          '<p class="text-center text-red-500 py-8 text-sm">डेटा लोड करने में समस्या आई।</p>';
+        const response = await fetch(`data/ch${chNum}.json?v=${Date.now()}`);
+        if (!response.ok) throw new Error('File not found');
+        currentChapterData = await response.json();
+        document.getElementById('search').value = '';
+        renderChapter(currentChapterData);
+      } catch (err) {
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-2xl text-center text-stone-600 border border-amber-200">
+            <span class="text-3xl block mb-2">✍️</span>
+            <p class="font-bold text-stone-800 text-sm mb-1">अध्याय उपलब्ध हो रहा है</p>
+            <p class="text-xs text-stone-500">इस अध्याय की अध्ययन सामग्री शीघ्र संकलित की जा रही है।</p>
+          </div>`;
+        document.getElementById('shloka-count').textContent = 'शीघ्र उपलब्ध';
+        document.getElementById('active-count').textContent = '';
       }
     }
 
-    function setupDropdown() {
+    function renderChapter(items) {
       const select = document.getElementById('chapter-select');
-      const chapters = [...new Set(allShlokas.map(s => s.chapter))];
+      const selectedText = select.options[select.selectedIndex].text;
       
-      chapters.forEach(ch => {
-        const opt = document.createElement('option');
-        opt.value = ch;
-        opt.textContent = ch;
-        select.appendChild(opt);
-      });
-    }
-
-    function renderShlokas(items) {
-      const countBadge = document.getElementById('shloka-count');
-      const activeText = document.getElementById('active-count');
-      const currentChapterLabel = document.getElementById('current-chapter-label');
-      const selectedChapter = document.getElementById('chapter-select').value;
-
-      if (countBadge) countBadge.textContent = `कुल उपलब्ध श्लोक: ${allShlokas.length}`;
-      if (activeText) activeText.textContent = `दिख रहे हैं: ${items.length}`;
-      if (currentChapterLabel) {
-        currentChapterLabel.textContent = selectedChapter === 'all' ? 'सभी अध्याय' : selectedChapter;
-      }
+      document.getElementById('current-chapter-title').textContent = selectedText;
+      document.getElementById('shloka-count').textContent = `कुल श्लोक: ${currentChapterData.length}`;
+      document.getElementById('active-count').textContent = `दिख रहे हैं: ${items.length}`;
 
       const container = document.getElementById('cards-container');
       if (!items || items.length === 0) {
         container.innerHTML = `
           <div class="bg-white p-8 rounded-2xl text-center text-stone-500 border border-stone-200">
             <span class="text-3xl block mb-2">🔍</span>
-            <p class="font-medium text-sm">कोई श्लोक नहीं मिला।</p>
+            <p class="font-medium text-sm">कोई श्लोक या नियम नहीं मिला।</p>
           </div>`;
         return;
       }
@@ -112,12 +166,9 @@
       container.innerHTML = items.map(item => `
         <article class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden hover:border-amber-400 transition-colors">
           <div class="bg-stone-100 px-4 py-2.5 flex items-center justify-between border-b border-stone-200">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-bold bg-amber-900 text-amber-100 px-2.5 py-0.5 rounded-md">
-                ${item.shloka_num}
-              </span>
-              <span class="text-[11px] text-stone-500 font-medium">${item.chapter}</span>
-            </div>
+            <span class="text-xs font-bold bg-amber-900 text-amber-100 px-2.5 py-0.5 rounded-md">
+              ${item.shloka_num}
+            </span>
             <span class="text-xs font-semibold text-stone-700">${item.topic}</span>
           </div>
 
@@ -129,7 +180,7 @@
             </div>
 
             <details class="text-xs text-stone-600 group">
-              <summary class="cursor-pointer text-amber-800 font-semibold select-none">
+              <summary class="cursor-pointer text-amber-800 font-semibold select-none hover:underline">
                 📖 पदच्छेद एवं शब्दार्थ (विस्तार देखें)
               </summary>
               <div class="mt-2 p-2.5 bg-stone-50 rounded-lg border border-stone-200 leading-relaxed text-stone-700">
@@ -158,26 +209,21 @@
       `).join('');
     }
 
-    function filterContent() {
+    function filterCurrentChapter() {
       const q = document.getElementById('search').value.toLowerCase().trim();
-      const selectedChapter = document.getElementById('chapter-select').value;
-
-      const filtered = allShlokas.filter(item => {
-        const matchesChapter = (selectedChapter === 'all') || (item.chapter === selectedChapter);
-        const matchesQuery = !q || 
-          item.shloka_num.toLowerCase().includes(q) ||
-          item.topic.toLowerCase().includes(q) ||
-          item.sanskrit.toLowerCase().includes(q) ||
-          item.saral_hindi.toLowerCase().includes(q) ||
-          item.phalit_sutra.toLowerCase().includes(q);
-
-        return matchesChapter && matchesQuery;
-      });
-
-      renderShlokas(filtered);
+      const filtered = currentChapterData.filter(item => 
+        !q ||
+        item.shloka_num.toLowerCase().includes(q) ||
+        item.topic.toLowerCase().includes(q) ||
+        item.sanskrit.toLowerCase().includes(q) ||
+        item.saral_hindi.toLowerCase().includes(q) ||
+        item.phalit_sutra.toLowerCase().includes(q)
+      );
+      renderChapter(filtered);
     }
 
-    loadData();
+    // Default start with Chapter 1
+    switchChapter('1');
   </script>
 </body>
 </html>
